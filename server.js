@@ -54,3 +54,18 @@ app.post("/signin", (req, res) => {
 
     })
 });
+
+app.post("/login", (req, res) => {
+    const { loginUserName, loginPassword } = req.body;
+    userModel.findOne({ userName: loginUserName }, (err, doc) => {
+        if (!doc) {
+            res.send("no user name found")
+        }
+        else if (doc.password == loginPassword) {
+            res.send("currect username and password")
+        }
+        else {
+            res.send("wrong username or password")
+        }
+    })
+})
