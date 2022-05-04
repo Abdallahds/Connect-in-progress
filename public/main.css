@@ -1,0 +1,104 @@
+.indexNav {
+  width: 100%;
+  height: 10vh;
+  background-color: #c9d6df;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.mainLogo {
+  font-family: "Bangers", cursive;
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 5px;
+  margin-left: 50px;
+  color: #1e2022; }
+
+.loginForm {
+  margin-right: 50px; }
+  .loginForm input {
+    width: 250px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #1e2022;
+    outline: none;
+    font-size: 15px;
+    margin-right: 10px; }
+  .loginForm button {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #52616b;
+    outline: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #52616b;
+    color: #f0f5f9;
+    transition: all .5s; }
+    .loginForm button:hover {
+      background-color: #1e2022;
+      color: #f0f5f9; }
+
+.indexMain {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; }
+  .indexMain .indexText {
+    width: 40%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f0f5f9;
+    border-radius: 20px; }
+    .indexMain .indexText h1 {
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      color: #1e2022; }
+    .indexMain .indexText :nth-child(1) {
+      margin-right: 150px; }
+    .indexMain .indexText :nth-child(3) {
+      margin-left: 150px; }
+  .indexMain .signinForm {
+    width: 40%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f0f5f9;
+    border-radius: 20px; }
+    .indexMain .signinForm input {
+      margin-bottom: 30px;
+      width: 450px;
+      height: 50px;
+      font-size: 20px;
+      padding-left: 10px;
+      border: 1px solid #1e2022;
+      color: #1e2022;
+      border-radius: 5px;
+      outline: none; }
+    .indexMain .signinForm button {
+      width: 200px;
+      height: 60px;
+      font-size: 25px;
+      text-transform: uppercase;
+      border: 1px solid #1e2022;
+      border-radius: 5px;
+      background-color: #52616b;
+      color: #f0f5f9;
+      cursor: pointer;
+      transition: all .5s; }
+      .indexMain .signinForm button:hover {
+        background-color: #1e2022; }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif; }

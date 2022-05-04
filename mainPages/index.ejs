@@ -1,0 +1,32 @@
+<%- include('../partials/header'); -%> 
+
+<nav class="indexNav">
+    <h1 class="mainLogo">
+        Connect
+    </h1>
+
+    <form action="/login" method="post" class="loginForm">
+        <input type="email" placeholder="UserName" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</nav>
+
+<div class="indexMain">
+    <div class="indexText">
+        <h1>Connect</h1>
+        <h1>With the</h1>
+        <h1>World</h1>
+    </div>
+
+    <form action="/signin" method="post" class="signinForm">
+        <input type="text" placeholder="First Name" required name="firstName">
+        <input type="text" placeholder="Last Name" required name="lastName">
+        <input type="email" placeholder="User Name" required name="userName">
+        <input type="password" placeholder="Password" required name="password">
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+   
+
+<%- include('../partials/footer'); -%>
