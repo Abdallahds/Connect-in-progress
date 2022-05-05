@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: "todayIsAGoodDay" }))
 app.set("view engine", "ejs");
-
 
 mongoose.connect("mongodb://localhost:27017/Connect", { useUnifiedTopology: true, useNewUrlParser: true });
 const userSchema = mongoose.Schema({
@@ -21,8 +22,6 @@ const userModel = mongoose.model("user", userSchema)
 app.listen(3000, () => {
     console.log("the servier is running using port 3000");
 });
-
-
 
 app.get("/", (req, res) => {
     res.render(__dirname + "/mainPages/index.ejs")
@@ -49,6 +48,7 @@ app.post("/signin", (req, res) => {
                 password: password
             })
             user.save();
+            req.session.user = user.id;
             res.send("user has been regestered");
         }
 
@@ -63,6 +63,7 @@ app.post("/login", (req, res) => {
         }
         else if (doc.password == loginPassword) {
             res.send("currect username and password")
+            req.session.user = doc.id;
         }
         else {
             res.send("wrong username or password")
