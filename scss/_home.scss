@@ -2,18 +2,14 @@
     display: none;
 }
 
-.home {
+.main {
     height: 90vh;
     width: 100%;
     display: flex;
 
-    .options {
-        height: 100%;
-        width: 15%;
-        border-right: 1px solid $colorLightGray;
-    }
+    @include optionsNav;
 
-    .main {
+    .content {
         height: 100%;
         width: 85%;
         display: flex;

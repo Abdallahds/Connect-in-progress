@@ -1,0 +1,29 @@
+.editInfoForm {
+    background-color: $colorWhite;
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+
+    :nth-child(1) {
+        margin-top: 50px;
+    }
+
+    input {
+        width: 500px;
+        height: 50px;
+        margin-bottom: 50px;
+        outline: none;
+        padding-left: 20px;
+        font-size: 25px;
+        border: 1px solid $colorDarkGray;
+        border-radius: 10px;
+    }
+
+    button {
+        @include buttonGrayToDark;
+        font-size: 20px;
+    }
+}

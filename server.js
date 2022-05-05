@@ -38,10 +38,15 @@ app.get("/home", (req, res) => {
         res.redirect("/")
 })
 
-app.post("/logout", (req, res) => {
-    req.session.destroy();
-    res.redirect("/");
+
+app.get("/editInfo", (req, res) => {
+    if (req.session.user) {
+        res.render(__dirname + "/mainPages/editInfo", { user: req.session.user })
+    }
+    else res.redirect("/")
 })
+
+
 
 app.post("/signin", (req, res) => {
     const { firstName, lastName, userName, password } = req.body;
@@ -85,4 +90,18 @@ app.post("/login", (req, res) => {
             res.redirect("/");
         }
     })
+})
+
+app.post("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+})
+
+app.post("/editInfo", async (req, res) => {
+    const { editInfoFirstName, editInfoLastName } = req.body;
+    let doc = await userModel.findOneAndUpdate({ id: req.session.user._id },
+        { firstName: editInfoFirstName, lastName: editInfoLastName },
+        { new: true })
+    req.session.user = doc
+    res.redirect("editInfo");
 })

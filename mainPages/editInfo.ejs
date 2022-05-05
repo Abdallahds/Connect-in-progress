@@ -1,0 +1,20 @@
+<%- include('../partials/header'); -%> 
+
+<%- include("../partials/logedInNav"); -%>
+
+<div class="main">
+    <%- include("../partials/optionsNav"); -%>
+    <div class="content">
+        <form method="post" action="/editInfo" class="editInfoForm">
+            <input type="text" placeholder="First Name" value="<%= user.firstName %>" name="editInfoFirstName">            
+            <input type="text" placeholder="Last Name" value="<%= user.lastName %>" name="editInfoLastName">
+            <button type="submit">Change Info</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<%- include('../partials/footer'); -%>

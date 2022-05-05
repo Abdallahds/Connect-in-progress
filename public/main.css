@@ -98,21 +98,75 @@
 .main::-webkit-scrollbar {
   display: none; }
 
-.home {
+.main {
   height: 90vh;
   width: 100%;
   display: flex; }
-  .home .options {
+  .main .options {
     height: 100%;
     width: 15%;
-    border-right: 1px solid #c9d6df; }
-  .home .main {
+    border-right: 1px solid #c9d6df;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px; }
+    .main .options a {
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 20px;
+      color: #1e2022;
+      border: 1px solid #1e2022;
+      padding-top: 15px;
+      width: 200px;
+      height: 60px;
+      text-align: center;
+      margin-bottom: 30px;
+      border-radius: 20px;
+      transition: all .3s; }
+      .main .options a:hover {
+        background-color: #1e2022;
+        color: #f0f5f9; }
+  .main .content {
     height: 100%;
     width: 85%;
     display: flex;
     align-items: center;
     flex-direction: column;
     overflow-y: scroll; }
+
+.editInfoForm {
+  background-color: #f0f5f9;
+  width: 1000px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px; }
+  .editInfoForm :nth-child(1) {
+    margin-top: 50px; }
+  .editInfoForm input {
+    width: 500px;
+    height: 50px;
+    margin-bottom: 50px;
+    outline: none;
+    padding-left: 20px;
+    font-size: 25px;
+    border: 1px solid #1e2022;
+    border-radius: 10px; }
+  .editInfoForm button {
+    width: 200px;
+    height: 60px;
+    font-size: 25px;
+    text-transform: uppercase;
+    border: 1px solid #1e2022;
+    border-radius: 5px;
+    background-color: #52616b;
+    color: #f0f5f9;
+    cursor: pointer;
+    transition: all .5s;
+    font-size: 20px; }
+    .editInfoForm button:hover {
+      background-color: #1e2022; }
 
 * {
   padding: 0;
