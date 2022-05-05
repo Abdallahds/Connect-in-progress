@@ -27,3 +27,24 @@
         font-size: 20px;
     }
 }
+
+.uploadImgForm {
+    text-align: center;
+    position: relative;
+    top: -140px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+
+    input {
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-left: 100px;
+    }
+
+    button {
+        @include buttonGrayToDark;
+        font-size: 20px;
+    }
+}

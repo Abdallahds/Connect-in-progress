@@ -1,5 +1,16 @@
+<style>
+    .profileImage{
+        background-image:url("profileImages/<%= user.profileImage %>");
+    }
+</style>
+
 <nav class="nav">
-    <h1 class="logo">Image <%= user.firstName+" " + user.lastName %> </h1>
+    <div class="profileImageAndName">
+        <div class="profileImage">
+        </div>
+        
+        <h1 class="logo"> <%= user.firstName+" " + user.lastName %> </h1>
+    </div>
     <form action="/logout" method="post" class="form"> 
         <button type="submit">logout</button>
     </form>    

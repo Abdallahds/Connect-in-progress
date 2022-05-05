@@ -10,6 +10,10 @@
             <input type="text" placeholder="Last Name" value="<%= user.lastName %>" name="editInfoLastName">
             <button type="submit">Change Info</button>
         </form>
+        <form action="/uploadImg" method="post" class="uploadImgForm" enctype="multipart/form-data">
+            <input type="file" name="profileImage" class="profileImage" accept="image/*" required>
+            <button type="submit">upload Profile Image</button>
+        </form>
     </div>
 </div>
 
