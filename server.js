@@ -6,7 +6,11 @@ const session = require("express-session");
 const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: "todayIsAGoodDay" }))
+app.use(session({
+    secret: "todayIsAGoodDay",
+    resave: true,
+    saveUninitialized: true
+}))
 app.set("view engine", "ejs");
 
 mongoose.connect("mongodb://localhost:27017/Connect", { useUnifiedTopology: true, useNewUrlParser: true });
@@ -60,7 +64,7 @@ app.post("/signin", (req, res) => {
                 password: password
             })
             user.save();
-            req.session.user = user.id;
+            req.session.user = user;
             res.redirect("/home")
         }
 
@@ -74,7 +78,7 @@ app.post("/login", (req, res) => {
             res.send("no user name found")
         }
         else if (doc.password == loginPassword) {
-            req.session.user = doc.id;
+            req.session.user = doc;
             res.redirect("/home");
         }
         else {

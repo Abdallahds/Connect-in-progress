@@ -1,15 +1,20 @@
 <%- include('../partials/header'); -%> 
-<!-- <%= user %> -->
+<!-- <%= user.firstName + user.lastName + user._id %> -->
 
 <nav class="nav">
-    <h1 class="logo">Connect</h1>
+    <h1 class="logo">Image <%= user.firstName+" " + user.lastName %> </h1>
     <form action="/logout" method="post" class="form"> 
         <button type="submit">logout</button>
     </form>    
 </nav>
 
 <div class="home">
-    
+    <div class="options">
+
+    </div>
+    <div class="main">
+        
+    </div>
 </div>
 
 
