@@ -1,0 +1,10 @@
+.home::-webkit-scrollbar {
+    display: none;
+}
+
+.home {
+    height: 90vh;
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+}

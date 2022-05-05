@@ -1,0 +1,53 @@
+.nav {
+    width: 100%;
+    height: 10vh;
+    background-color: $colorLightGray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+
+    .logo {
+        font-family: $fontSecand;
+        text-transform: uppercase;
+        font-size: 40px;
+        letter-spacing: 5px;
+        margin-left: 50px;
+        color: $colorDarkGray;
+    }
+
+    .form {
+        margin-right: 50px;
+
+        input {
+            width: 250px;
+            height: 40px;
+            padding-left: 10px;
+            border-radius: 5px;
+            border: 1px solid $colorDarkGray;
+            outline: none;
+            font-size: 15px;
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100px;
+            height: 40px;
+            border: 1px solid $colorGray;
+            outline: none;
+            border-radius: 5px;
+            font-size: 15px;
+            text-transform: uppercase;
+            cursor: pointer;
+            background-color: $colorGray;
+            color: $colorWhite;
+            transition: all .5s;
+
+            &:hover {
+                background-color: $colorDarkGray;
+                color: $colorWhite;
+            }
+        }
+    }
+}

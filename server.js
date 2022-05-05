@@ -27,6 +27,18 @@ app.get("/", (req, res) => {
     res.render(__dirname + "/mainPages/index.ejs")
 });
 
+app.get("/home", (req, res) => {
+    if (req.session.user)
+        res.render(__dirname + "/mainPages/home", { user: req.session.user })
+    else
+        res.redirect("/")
+})
+
+app.post("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+})
+
 app.post("/signin", (req, res) => {
     const { firstName, lastName, userName, password } = req.body;
 
@@ -49,7 +61,7 @@ app.post("/signin", (req, res) => {
             })
             user.save();
             req.session.user = user.id;
-            res.send("user has been regestered");
+            res.redirect("/home")
         }
 
     })
@@ -62,11 +74,11 @@ app.post("/login", (req, res) => {
             res.send("no user name found")
         }
         else if (doc.password == loginPassword) {
-            res.send("currect username and password")
             req.session.user = doc.id;
+            res.redirect("/home");
         }
         else {
-            res.send("wrong username or password")
+            res.redirect("/");
         }
     })
 })
