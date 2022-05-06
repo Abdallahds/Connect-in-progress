@@ -11,7 +11,7 @@ app.use(session({
     secret: "todayIsAGoodDay",
     resave: true,
     saveUninitialized: true
-}))
+}));
 app.set("view engine", "ejs");
 
 ///////////////////////multer///////////////////////
@@ -25,9 +25,9 @@ let storage = multer.diskStorage({
         const uniqesuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, file.fieldname + '-' + uniqesuffix + '-' + file.originalname)
     }
-})
+});
 
-let upload = multer({ storage: storage })
+let upload = multer({ storage: storage });
 
 
 ////////////////////////mongooseDatabase///////////////
@@ -37,8 +37,9 @@ const userSchema = mongoose.Schema({
     lastName: String,
     userName: String,
     password: String,
-    profileImage: String
-})
+    profileImage: String,
+    posts: []
+});
 
 const userModel = mongoose.model("user", userSchema)
 //////////////////////////////////////////////////////////
@@ -46,19 +47,19 @@ app.listen(3000, () => {
     console.log("the servier is running using port 3000");
 });
 
-
-
 ////////////////////////get///////////////////////////////
 app.get("/", (req, res) => {
     res.render(__dirname + "/mainPages/index.ejs")
 });
 
-app.get("/home", (req, res) => {
-    if (req.session.user)
-        res.render(__dirname + "/mainPages/home", { user: req.session.user })
+app.get("/home", async (req, res) => {
+    if (req.session.user) {
+        let doc = await userModel.findById(req.session.user._id);
+        res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: doc });
+    }
     else
         res.redirect("/")
-})
+});
 
 
 app.get("/editInfo", (req, res) => {
@@ -66,8 +67,7 @@ app.get("/editInfo", (req, res) => {
         res.render(__dirname + "/mainPages/editInfo", { user: req.session.user })
     }
     else res.redirect("/")
-})
-
+});
 
 ////////////////////post///////////////////////////////////
 app.post("/signin", (req, res) => {
@@ -112,12 +112,12 @@ app.post("/login", (req, res) => {
             res.redirect("/");
         }
     })
-})
+});
 
 app.post("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/");
-})
+});
 
 app.post("/editInfo", async (req, res) => {
     const { editInfoFirstName, editInfoLastName } = req.body;
@@ -126,12 +126,16 @@ app.post("/editInfo", async (req, res) => {
         { new: true })
     req.session.user = doc
     res.redirect("editInfo");
-})
+});
 
 app.post("/uploadImg", upload.single("profileImage"), async (req, res) => {
-    console.log(req.file.filename);
     let doc = await userModel.findOneAndUpdate({ id: req.session.user._id },
         { profileImage: req.file.filename }, { new: true });
     req.session.user = doc
     res.redirect("editInfo");
+})
+
+app.post("/addBlogPost", async (req, res) => {
+    await userModel.updateOne({ _id: req.session.user._id }, { $push: { posts: req.body.postText } });
+    res.redirect("/home");
 })

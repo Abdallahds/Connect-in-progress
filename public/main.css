@@ -8,7 +8,7 @@
   .nav .profileImageAndName {
     display: flex;
     align-items: center;
-    width: 600px;
+    width: 1000px;
     margin-left: 50px; }
     .nav .profileImageAndName .profileImage {
       width: 90px;
@@ -110,6 +110,13 @@
 .content::-webkit-scrollbar {
   display: none; }
 
+.profileImage {
+  margin-left: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-size: cover; }
+
 .main {
   height: 88vh;
   width: 100%;
@@ -145,6 +152,57 @@
     align-items: center;
     flex-direction: column;
     overflow-y: scroll; }
+    .main .content .postForm {
+      width: 800px;
+      height: 150px;
+      padding-left: 50px;
+      background-color: #c9d6df;
+      margin-top: 50px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center; }
+      .main .content .postForm form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: 20px 0 0 80px; }
+        .main .content .postForm form textarea {
+          resize: none;
+          width: 500px;
+          height: 50px;
+          padding: 10px 0 0 10px;
+          font-size: 18px;
+          outline: none;
+          border: 1px solid #1e2022;
+          border-radius: 5px; }
+        .main .content .postForm form button {
+          width: 200px;
+          height: 60px;
+          font-size: 25px;
+          text-transform: uppercase;
+          border: 1px solid #1e2022;
+          border-radius: 5px;
+          background-color: #52616b;
+          color: #f0f5f9;
+          cursor: pointer;
+          transition: all .5s;
+          font-size: 20px;
+          width: 200px;
+          height: 40px;
+          margin-top: 20px; }
+          .main .content .postForm form button:hover {
+            background-color: #1e2022; }
+    .main .content .post {
+      width: 800px;
+      height: 300px;
+      background-color: #c9d6df;
+      border-radius: 50px;
+      margin: 30px 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column; }
+      .main .content .post .postOwner {
+        margin: 10px 600px 0 0; }
 
 .editInfoForm {
   background-color: #f0f5f9;

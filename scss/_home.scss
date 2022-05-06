@@ -2,11 +2,18 @@
     display: none;
 }
 
+.profileImage {
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: cover;
+}
+
 .main {
     height: 88vh;
     width: 100%;
     display: flex;
-
     @include optionsNav;
 
     .content {
@@ -16,5 +23,57 @@
         align-items: center;
         flex-direction: column;
         overflow-y: scroll;
+
+        .postForm {
+            width: 800px;
+            height: 150px;
+            padding-left: 50px;
+            background-color: $colorLightGray;
+            margin-top: 50px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+
+            form {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                margin: 20px 0 0 80px;
+
+                textarea {
+                    resize: none;
+                    width: 500px;
+                    height: 50px;
+                    padding: 10px 0 0 10px;
+                    font-size: 18px;
+                    outline: none;
+                    border: 1px solid $colorDarkGray;
+                    border-radius: 5px;
+                }
+
+                button {
+                    @include buttonGrayToDark;
+                    font-size: 20px;
+                    width: 200px;
+                    height: 40px;
+                    margin-top: 20px;
+                }
+            }
+        }
+
+        .post {
+            width: 800px;
+            height: 300px;
+            background-color: $colorLightGray;
+            border-radius: 50px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            .postOwner {
+                margin: 10px 600px 0 0;
+            }
+        }
     }
 }

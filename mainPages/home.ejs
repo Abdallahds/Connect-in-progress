@@ -1,10 +1,35 @@
 <%- include('../partials/header'); -%> 
 
+<style>
+    .profileImage{
+        background-image:url("profileImages/<%= user.profileImage %>");
+    }
+</style>
+
+
 <%- include("../partials/logedInNav"); -%>
 
 <div class="main">
     <%- include("../partials/optionsNav"); -%>
     <div class="content">
+        <div class="postForm">
+            <div class="profileImage"></div>
+            <form action="/addBlogPost" method="post">
+                <textarea id="" cols="30" rows="10" name="postText" required placeholder="What's in your mind <%= user.firstName %>........."></textarea>
+                <button type="submit">Share</button>
+            </form>
+        </div>
+
+        <% posts.posts.forEach(element =>{ %>
+            <div class="post">
+                <div class="postOwner">
+                    <div class="profileImage"></div>
+
+                </div>
+                <%= element %>
+             </div>
+        <% }) %>
+        
         
     </div>
 </div>
