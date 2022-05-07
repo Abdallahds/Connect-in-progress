@@ -32,19 +32,26 @@ let upload = multer({ storage: storage });
 
 ////////////////////////mongooseDatabase///////////////
 mongoose.connect("mongodb://localhost:27017/Connect", { useUnifiedTopology: true, useNewUrlParser: true });
+
 const userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     userName: String,
     password: String,
-    profileImage: String,
-    posts: []
+    profileImage: String
 });
 
-const userModel = mongoose.model("user", userSchema)
+const postSchema = mongoose.Schema({
+    user: String,
+    post: String
+})
+
+const userModel = mongoose.model("user", userSchema);
+
+const postModel = mongoose.model("post", postSchema);
 //////////////////////////////////////////////////////////
 app.listen(3000, () => {
-    console.log("the servier is running using port 3000");
+    console.log("the server is running using port 3000");
 });
 
 ////////////////////////get///////////////////////////////
@@ -52,10 +59,10 @@ app.get("/", (req, res) => {
     res.render(__dirname + "/mainPages/index.ejs")
 });
 
-app.get("/home", async (req, res) => {
+app.get("/home", (req, res) => {
     if (req.session.user) {
-        let doc = await userModel.findById(req.session.user._id);
-        res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: doc });
+
+        res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: [] });
     }
     else
         res.redirect("/")
@@ -136,6 +143,12 @@ app.post("/uploadImg", upload.single("profileImage"), async (req, res) => {
 })
 
 app.post("/addBlogPost", async (req, res) => {
-    await userModel.updateOne({ _id: req.session.user._id }, { $push: { posts: req.body.postText } });
+    if (req.session.user) {
+        const post = await new postModel({
+            user: req.session.user._id,
+            post: req.body.postText
+        })
+        post.save();
+    }
     res.redirect("/home");
 })
