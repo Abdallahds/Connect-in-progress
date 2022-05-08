@@ -1,32 +1,33 @@
 <%- include('../partials/header'); -%> 
 
-<style>
-    .profileImage{
-        background-image:url("profileImages/<%= user.profileImage %>");
-    }
-</style>
-
-
 <%- include("../partials/logedInNav"); -%>
 
 <div class="main">
     <%- include("../partials/optionsNav"); -%>
     <div class="content">
         <div class="postForm">
-            <div class="profileImage"></div>
+            <div class="profileImage img" style="background-image:url('profileImages/<%= user.profileImage %>');"></div>
             <form action="/addBlogPost" method="post">
-                <textarea id="" cols="30" rows="10" name="postText" required placeholder="What's in your mind <%= user.firstName %>........."></textarea>
+                <textarea id="" cols="30" rows="10" name="postText" maxlength="200" required placeholder="What's in your mind <%= user.firstName %>......... (200 characters max)"></textarea>
                 <button type="submit">Share</button>
             </form>
         </div>
 
-            <div class="post">
-                <div class="postOwner">
-                    <div class="profileImage"></div>
+            <% posts.reverse().forEach((Element) => { %>
+                <div class="post">
+                    <div class="postOwner">
+                        <div class="profileImage" style="background-image:url('profileImages/<%= Element.owner.profileImage %>');"></div>
+                    </div>
+                    <div class="postContent">
+                        <div class="name">
+                            <%= Element.owner.firstName %>
+                            <%= Element.owner.lastName %>
+                        </div>
+                        <%= Element.post %>
+                    </div>
                 </div>
-               
-            </div>
-        
+            <% }) %>
+
     </div>
 </div>
 

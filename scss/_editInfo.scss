@@ -29,18 +29,20 @@
 }
 
 .uploadImgForm {
+
+    border-top: 1px solid $colorDarkGray;
+    padding-top: 50px;
+    margin-top: -30px;
     text-align: center;
     position: relative;
     top: -140px;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    width: 400px;
+    justify-content: center;
+    width: 1000px;
 
     input {
         font-size: 20px;
-        margin-bottom: 20px;
-        margin-left: 100px;
     }
 
     button {

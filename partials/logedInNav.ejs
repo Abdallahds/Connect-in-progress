@@ -1,12 +1,10 @@
 <style>
-    .profileImage{
-        background-image:url("profileImages/<%= user.profileImage %>");
-    }
+    
 </style>
 
 <nav class="nav">
     <div class="profileImageAndName">
-        <div class="profileImage">
+        <div class="profileImage" style="background-image:url('profileImages/<%= user.profileImage %>');">
         </div>
         
         <h1 class="logo"> <%= user.firstName+" " + user.lastName %> </h1>

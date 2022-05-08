@@ -110,6 +110,9 @@
 .content::-webkit-scrollbar {
   display: none; }
 
+.postContent::-webkit-scrollbar {
+  display: none; }
+
 .profileImage {
   margin-left: 10px;
   width: 100px;
@@ -146,30 +149,32 @@
         background-color: #1e2022;
         color: #f0f5f9; }
   .main .content {
+    width: 100%;
     height: 100%;
-    width: 85%;
     display: flex;
     align-items: center;
     flex-direction: column;
     overflow-y: scroll; }
     .main .content .postForm {
       width: 800px;
-      height: 150px;
+      min-height: 180px;
       padding-left: 50px;
       background-color: #c9d6df;
       margin-top: 50px;
-      border-radius: 50px;
+      border-radius: 20px;
       display: flex;
       align-items: center; }
+      .main .content .postForm .img {
+        margin: -50px 0 0 -30px; }
       .main .content .postForm form {
         display: flex;
         align-items: center;
         flex-direction: column;
-        margin: 20px 0 0 80px; }
+        margin: -10px 0 0 40px; }
         .main .content .postForm form textarea {
           resize: none;
-          width: 500px;
-          height: 50px;
+          width: 600px;
+          height: 60px;
           padding: 10px 0 0 10px;
           font-size: 18px;
           outline: none;
@@ -194,15 +199,27 @@
             background-color: #1e2022; }
     .main .content .post {
       width: 800px;
-      height: 300px;
+      min-height: 200px;
       background-color: #c9d6df;
-      border-radius: 50px;
+      border-radius: 20px;
       margin: 30px 0;
-      display: flex;
-      align-items: center;
-      flex-direction: column; }
+      display: flex; }
       .main .content .post .postOwner {
-        margin: 10px 600px 0 0; }
+        margin: 10px 40px 0 10px;
+        display: flex; }
+      .main .content .post .postContent {
+        max-width: 630px;
+        font-size: 20px;
+        text-align: left;
+        overflow-y: scroll;
+        overflow-wrap: break-word;
+        height: 157px; }
+        .main .content .post .postContent .name {
+          font-size: 22px;
+          margin: 30px 0 15px 0;
+          border-bottom: 1px solid #1e2022;
+          padding-bottom: 10px;
+          text-transform: uppercase; }
 
 .editInfoForm {
   background-color: #f0f5f9;
@@ -239,17 +256,18 @@
       background-color: #1e2022; }
 
 .uploadImgForm {
+  border-top: 1px solid #1e2022;
+  padding-top: 50px;
+  margin-top: -30px;
   text-align: center;
   position: relative;
   top: -140px;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  width: 400px; }
+  justify-content: center;
+  width: 1000px; }
   .uploadImgForm input {
-    font-size: 20px;
-    margin-bottom: 20px;
-    margin-left: 100px; }
+    font-size: 20px; }
   .uploadImgForm button {
     width: 200px;
     height: 60px;

@@ -40,13 +40,14 @@ const userSchema = mongoose.Schema({
     password: String,
     profileImage: String
 });
+const userModel = mongoose.model("user", userSchema);
+
 
 const postSchema = mongoose.Schema({
-    user: String,
-    post: String
+    post: String,
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: userModel }
 })
 
-const userModel = mongoose.model("user", userSchema);
 
 const postModel = mongoose.model("post", postSchema);
 //////////////////////////////////////////////////////////
@@ -59,10 +60,11 @@ app.get("/", (req, res) => {
     res.render(__dirname + "/mainPages/index.ejs")
 });
 
-app.get("/home", (req, res) => {
+app.get("/home", async (req, res) => {
     if (req.session.user) {
-
-        res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: [] });
+        let posts = await postModel.find({ id: req.session.user._id }).populate("owner", "firstName lastName profileImage")
+        console.log(posts);
+        res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: posts });
     }
     else
         res.redirect("/")
@@ -144,9 +146,10 @@ app.post("/uploadImg", upload.single("profileImage"), async (req, res) => {
 
 app.post("/addBlogPost", async (req, res) => {
     if (req.session.user) {
+        let user = await userModel.findById(req.session.user._id);
         const post = await new postModel({
-            user: req.session.user._id,
-            post: req.body.postText
+            post: req.body.postText,
+            owner: user
         })
         post.save();
     }
