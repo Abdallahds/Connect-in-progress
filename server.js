@@ -63,7 +63,6 @@ app.get("/", (req, res) => {
 app.get("/home", async (req, res) => {
     if (req.session.user) {
         let posts = await postModel.find({ id: req.session.user._id }).populate("owner", "firstName lastName profileImage")
-        console.log(posts);
         res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: posts });
     }
     else
@@ -77,6 +76,11 @@ app.get("/editInfo", (req, res) => {
     }
     else res.redirect("/")
 });
+app.get("/friends", (req, res) => {
+    if (req.session.user) {
+        res.render(__dirname + "/mainPages/friends", { user: req.session.user })
+    }
+})
 
 ////////////////////post///////////////////////////////////
 app.post("/signin", (req, res) => {
@@ -90,7 +94,7 @@ app.post("/signin", (req, res) => {
             }
         })
         if (userFound) {
-            res.send("the userName has been used!!!!!")
+            res.send("the userName has already been used!!!!!")
         }
         else {
             const user = new userModel({
