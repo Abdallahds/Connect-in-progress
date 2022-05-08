@@ -5,7 +5,24 @@
     <div class="main">
         <%- include("../partials/optionsNav"); -%>
         <div class="content">
-            <h1>friends page</h1>
+            <form action="/friendSearch" method="post"  class="friendForm">
+                <input type="text" name="friendName" id="" placeholder="Friend Name...........">
+                <button type="submit">Search</button>
+            </form>
+
+            <div class="friendsShow">
+                <% friends.forEach((Element)=>{ %>
+                    <div class="friend">
+                        <h1>
+                            <%= Element.firstName %>
+                            <%= Element.lastName %>
+                        </h1>
+                    </div>
+                <% }) %>
+            </div>
+            
+            
+
         </div>
     </div>
 

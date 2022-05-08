@@ -76,9 +76,13 @@ app.get("/editInfo", (req, res) => {
     }
     else res.redirect("/")
 });
+
 app.get("/friends", (req, res) => {
     if (req.session.user) {
-        res.render(__dirname + "/mainPages/friends", { user: req.session.user })
+        res.render(__dirname + "/mainPages/friends", { user: req.session.user, friends: [] })
+    }
+    else {
+        res.redirect("/")
     }
 })
 
@@ -98,8 +102,8 @@ app.post("/signin", (req, res) => {
         }
         else {
             const user = new userModel({
-                firstName: firstName,
-                lastName: lastName,
+                firstName: firstName.toLowerCase(),
+                lastName: lastName.toLowerCase(),
                 userName: userName,
                 password: password
             })
@@ -158,4 +162,10 @@ app.post("/addBlogPost", async (req, res) => {
         post.save();
     }
     res.redirect("/home");
+})
+
+app.post("/friendSearch", async (req, res) => {
+    let { friendName } = req.body
+    let friends = await userModel.find({ $or: [{ firstName: { $regex: friendName.toLowerCase() } }, { lastName: { $regex: friendName.toLowerCase() } }] })
+    res.render(__dirname + "/mainPages/friends", { user: req.session.user, friends: friends })
 })
