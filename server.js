@@ -9,8 +9,8 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: "todayIsAGoodDay",
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
 app.set("view engine", "ejs");
 
@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
 
 app.get("/home", async (req, res) => {
     if (req.session.user) {
-        let posts = await postModel.find({ id: req.session.user._id }).populate("owner", "firstName lastName profileImage")
+        let posts = await postModel.find({ owner: req.session.user._id }).populate("owner", "firstName lastName profileImage")
         res.render(__dirname + "/mainPages/home", { user: req.session.user, posts: posts });
     }
     else
@@ -115,20 +115,22 @@ app.post("/signin", (req, res) => {
     })
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     const { loginUserName, loginPassword } = req.body;
-    userModel.findOne({ userName: loginUserName }, (err, doc) => {
-        if (!doc) {
-            res.send("no user name found")
-        }
-        else if (doc.password == loginPassword) {
-            req.session.user = doc;
-            res.redirect("/home");
+    let user = await userModel.findOne({ userName: loginUserName })
+    if (user) {
+        if (user.password == loginPassword) {
+            req.session.user = user;
+            res.redirect("/home")
         }
         else {
-            res.redirect("/");
+            res.send("wrong userName or password")
         }
-    })
+    }
+    else {
+        res.send("wrong userName or password")
+    }
+
 });
 
 app.post("/logout", (req, res) => {
@@ -138,15 +140,15 @@ app.post("/logout", (req, res) => {
 
 app.post("/editInfo", async (req, res) => {
     const { editInfoFirstName, editInfoLastName } = req.body;
-    let doc = await userModel.findOneAndUpdate({ id: req.session.user._id },
+    let user = await userModel.findOneAndUpdate({ _id: req.session.user._id },
         { firstName: editInfoFirstName, lastName: editInfoLastName },
-        { new: true })
-    req.session.user = doc
+        { new: true });
+    req.session.user = user;
     res.redirect("editInfo");
 });
 
 app.post("/uploadImg", upload.single("profileImage"), async (req, res) => {
-    let doc = await userModel.findOneAndUpdate({ id: req.session.user._id },
+    let doc = await userModel.findOneAndUpdate({ _id: req.session.user._id },
         { profileImage: req.file.filename }, { new: true });
     req.session.user = doc
     res.redirect("editInfo");
