@@ -38,17 +38,15 @@ const userSchema = mongoose.Schema({
     lastName: String,
     userName: String,
     password: String,
-    profileImage: String
+    profileImage: String,
+    friends: [{ type: mongoose.Schema.Types.ObjectId }]
 });
 const userModel = mongoose.model("user", userSchema);
-
 
 const postSchema = mongoose.Schema({
     post: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: userModel }
 })
-
-
 const postModel = mongoose.model("post", postSchema);
 //////////////////////////////////////////////////////////
 app.listen(3000, () => {
@@ -168,6 +166,9 @@ app.post("/addBlogPost", async (req, res) => {
 
 app.post("/friendSearch", async (req, res) => {
     let { friendName } = req.body
-    let friends = await userModel.find({ $or: [{ firstName: { $regex: friendName.toLowerCase() } }, { lastName: { $regex: friendName.toLowerCase() } }] })
+    let friends = await userModel.find({
+        $or: [{ firstName: { $regex: friendName.toLowerCase() } }
+            , { lastName: { $regex: friendName.toLowerCase() } }]
+    }).sort("firstName")
     res.render(__dirname + "/mainPages/friends", { user: req.session.user, friends: friends })
 })

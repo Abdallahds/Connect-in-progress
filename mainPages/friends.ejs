@@ -13,10 +13,23 @@
             <div class="friendsShow">
                 <% friends.forEach((Element)=>{ %>
                     <div class="friend">
-                        <h1>
-                            <%= Element.firstName %>
-                            <%= Element.lastName %>
-                        </h1>
+                        <div class="friendInfo">
+                            <div class="profileImage friendImage" style="background-image:url('profileImages/<%= Element.profileImage %>');">
+
+                            </div>
+                            <h1>
+                                <%= Element.firstName %>
+                                <%= Element.lastName %>
+                            </h1>
+                        </div>
+                        <div class="options">
+                            <a class="friendOption" href="#">visit profile</a>
+                            <% if( Element._id != user._id ){ %>
+                                <a class="friendOption" href="#">add friend</a>
+                            <% } %>
+                            
+                        </div>
+                        
                     </div>
                 <% }) %>
             </div>

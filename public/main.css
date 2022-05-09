@@ -132,7 +132,7 @@
     align-items: center;
     flex-direction: column;
     padding-top: 50px; }
-    .main .options a {
+    .main .options .optionLink {
       text-transform: uppercase;
       text-decoration: none;
       font-size: 20px;
@@ -145,7 +145,7 @@
       margin-bottom: 30px;
       border-radius: 20px;
       transition: all .3s; }
-      .main .options a:hover {
+      .main .options .optionLink:hover {
         background-color: #1e2022;
         color: #f0f5f9; }
   .main .content {
@@ -284,6 +284,9 @@
     .uploadImgForm button:hover {
       background-color: #1e2022; }
 
+.friendsShow::-webkit-scrollbar {
+  display: none; }
+
 .friendForm {
   width: 800px;
   min-height: 100px;
@@ -323,15 +326,50 @@
   width: 100%;
   height: 80vh;
   overflow-y: scroll;
-  margin-top: 20px;
+  margin-top: 100px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap; }
   .friendsShow .friend {
-    margin: 50px;
     border: 1px solid #1e2022;
-    height: 250px;
-    width: 500px; }
+    height: 200px;
+    width: 500px;
+    display: flex;
+    flex-direction: column; }
+    .friendsShow .friend .friendInfo {
+      display: flex; }
+      .friendsShow .friend .friendInfo h1 {
+        text-transform: uppercase;
+        font-size: 25px;
+        margin-top: 40px; }
+      .friendsShow .friend .friendInfo .friendImage {
+        margin: 10px 30px 0 20px; }
+    .friendsShow .friend .options {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: -50px; }
+      .friendsShow .friend .options .friendOption {
+        width: 200px;
+        height: 60px;
+        font-size: 25px;
+        text-transform: uppercase;
+        border: 1px solid #1e2022;
+        border-radius: 5px;
+        background-color: #52616b;
+        color: #f0f5f9;
+        cursor: pointer;
+        transition: all .5s;
+        font-size: 20px;
+        width: 200px;
+        height: 50px;
+        text-align: center;
+        padding-top: 10px;
+        text-decoration: none; }
+        .friendsShow .friend .options .friendOption:hover {
+          background-color: #1e2022; }
 
 * {
   padding: 0;
